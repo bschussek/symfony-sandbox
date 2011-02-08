@@ -1,4 +1,5 @@
 /build/
-/vendor_full/
+/vendor/
+/vendor_stripped/
 /app/cache/*
 /app/logs/*

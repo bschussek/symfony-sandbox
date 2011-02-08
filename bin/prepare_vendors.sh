@@ -3,22 +3,22 @@
 # init
 DIR=`php -r "echo realpath(dirname(\\$_SERVER['argv'][0]));"`
 cd $DIR/
-rm -rf vendor
-mkdir vendor
-TARGET=$DIR/vendor
+rm -rf vendor_stripped
+mkdir vendor_stripped
+TARGET=$DIR/vendor_stripped
 cd $TARGET
 
-if [ ! -d "$DIR/vendor" ]; then
+if [ ! -d "$DIR/vendor_stripped" ]; then
     echo "The master vendor directory does not exist"
     exit
 fi
 
-cp -r $DIR/vendor_full/* .
+cp -r $DIR/vendor/* .
 
 # Default configuration
-cp $DIR/../symfony-bootstrapper/src/skeleton/application/php/config/config* $DIR/app/config/
-cp $DIR/../symfony-bootstrapper/src/skeleton/application/yml/config/config* $DIR/app/config/
-cp $DIR/../symfony-bootstrapper/src/skeleton/application/xml/config/config* $DIR/app/config/
+#cp $DIR/../symfony-bootstrapper/src/skeleton/application/php/config/config* $DIR/app/config/
+#cp $DIR/../symfony-bootstrapper/src/skeleton/application/yml/config/config* $DIR/app/config/
+#cp $DIR/../symfony-bootstrapper/src/skeleton/application/xml/config/config* $DIR/app/config/
 
 # Doctrine ORM
 cd doctrine && rm -rf UPGRADE* build* bin tests tools lib/vendor

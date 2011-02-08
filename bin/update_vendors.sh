@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DIR=`php -r "echo realpath(dirname(\\$_SERVER['argv'][0]));"`
-VENDOR=$DIR/vendor_full
+VENDOR=$DIR/vendor
 
 # Symfony
 cd $VENDOR/symfony && git fetch origin && git reset --hard origin/master
