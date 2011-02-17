@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Symfony\Component\DependencyInjection\Configuration\Builder;
 
 /**
@@ -19,6 +28,7 @@ class NodeBuilder
     public $children;
     public $prototype;
     public $normalization;
+    public $validation;
     public $merge;
     public $finalization;
     public $defaultValue;
@@ -391,6 +401,34 @@ class NodeBuilder
         $this->performDeepMerging = false;
 
         return $this;
+    }
+
+    /**
+     * Gets the builder for validation rules.
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ValidationBuilder
+     */
+    protected function validation()
+    {
+        if (null === $this->validation) {
+            $this->validation = new ValidationBuilder($this);
+        }
+
+        return $this->validation;
+    }
+
+    /**
+     * Sets an expression to run for the validation.
+     *
+     * The expression receives the value of the node and must return it. It can
+     * modify it.
+     * An exception should be thrown when the node is not valid.
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function validate()
+    {
+        return $this->validation()->rule();
     }
 
     /**

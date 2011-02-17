@@ -1,0 +1,10 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+<form action="#" method="post">
+    {{ form_field(form) }}
+    
+    <p><a href="{{ path('blog_index') }}">Abort</a> | <input type="submit" name="Save" /></p>
+    
+</form>
+{% endblock %}

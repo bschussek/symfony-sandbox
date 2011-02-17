@@ -1,11 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Symfony\Component\DependencyInjection\Configuration\Builder;
 
 /**
  * This class builds an if expression.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+ * @author Christophe Coevoet <stof@notk.org>
  */
 class ExprBuilder
 {
@@ -21,6 +31,18 @@ class ExprBuilder
     public function __construct($parent)
     {
         $this->parent = $parent;
+    }
+
+    /**
+     * Mark the expression as being always used.
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function always()
+    {
+        $this->ifPart = function($v) { return true; };
+
+        return $this;
     }
 
     /**
@@ -79,6 +101,34 @@ class ExprBuilder
     }
 
     /**
+     * Tests if the value is in an array.
+     *
+     * @param array $array
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function ifInArray(array $array)
+    {
+        $this->ifPart = function($v) use ($array) { return in_array($v, $array, true); };
+
+        return $this;
+    }
+
+    /**
+     * Tests if the value is not in an array.
+     *
+     * @param array $array
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function ifNotInArray(array $array)
+    {
+        $this->ifPart = function($v) use ($array) { return !in_array($v, $array, true); };
+
+        return $this;
+    }
+
+    /**
      * Sets the closure to run if the test pass.
      *
      * @param \Closure $closure
@@ -100,6 +150,34 @@ class ExprBuilder
     public function thenEmptyArray()
     {
         $this->thenPart = function($v) { return array(); };
+
+        return $this;
+    }
+
+    /**
+     * Sets a closure marking the value as invalid at validation time.
+     *
+     * if you want to add the value of the node in your message just use a %s placeholder.
+     *
+     * @param string $message
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function thenInvalid($message)
+    {
+        $this->thenPart = function ($v) use ($message) {throw new \InvalidArgumentException(sprintf($message, json_encode($v))); };
+
+        return $this;
+    }
+
+    /**
+     * Sets a closure unsetting this key of the array at validation time.
+     *
+     * @return Symfony\Component\DependencyInjection\Configuration\Builder\ExprBuilder
+     */
+    public function thenUnset()
+    {
+        $this->thenPart = function ($v) { throw new UnsetKeyException('Unsetting key'); };
 
         return $this;
     }

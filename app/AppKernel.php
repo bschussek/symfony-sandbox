@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             //new Symfony\Bundle\DoctrineMongoDBBundle\DoctrineMongoDBBundle(),
 
             // register your bundles
-            new Sensio\HelloBundle\HelloBundle(),
+            new Liip\BlogBundle\BlogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -36,14 +36,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        // use YAML for configuration
-        // comment to use another configuration format
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
-
-        // uncomment to use XML for configuration
-        //$loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.xml');
-
-        // uncomment to use PHP for configuration
-        //$loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.php');
     }
 }

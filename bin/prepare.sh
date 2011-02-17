@@ -16,9 +16,9 @@ fi
 cp -r $DIR/vendor_full/* .
 
 # Default configuration
-cp $DIR/../../symfony-bootstrapper/src/skeleton/application/php/config/config* $DIR/app/config/
-cp $DIR/../../symfony-bootstrapper/src/skeleton/application/yml/config/config* $DIR/app/config/
-cp $DIR/../../symfony-bootstrapper/src/skeleton/application/xml/config/config* $DIR/app/config/
+cp $DIR/../symfony-bootstrapper/src/skeleton/application/php/config/config* $DIR/app/config/
+cp $DIR/../symfony-bootstrapper/src/skeleton/application/yml/config/config* $DIR/app/config/
+cp $DIR/../symfony-bootstrapper/src/skeleton/application/xml/config/config* $DIR/app/config/
 
 # Assetic
 cd assetic && rm -rf tests
@@ -65,8 +65,8 @@ cd twig && rm -rf AUTHORS CHANGELOG README.markdown bin doc package.xml.tpl phpu
 cd $TARGET
 
 # Twig Extensions
-cd twig-extensions && rm -rf README doc phpunit.xml* test
-cd $TARGET
+#cd twig-extensions && rm -rf README doc phpunit.xml* test
+#cd $TARGET
 
 # Zend Framework
 cd zend && rm -rf INSTALL.txt README* bin demos documentation resources tests tools working; mkdir library/tmp; mv library/Zend/Exception.php library/tmp/; mv library/Zend/Log library/tmp/; rm -rf library/Zend; mv library/tmp library/Zend

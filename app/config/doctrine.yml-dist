@@ -1,0 +1,12 @@
+## Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        dbname:   xxxxxxxx
+        host:     127.0.0.1
+        user:     xxxxxxxx
+        password: xxxxxxxx
+    
+    orm:
+        mappings:
+            BlogBundle: ~

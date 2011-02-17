@@ -1,0 +1,11 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+<ul>
+{% for post in posts %}
+    <li><a href="{{ path('blog_edit', {'id': post.id}) }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+
+<p><a href="{{ path('blog_create') }}">Create post</a></p>
+{% endblock %}

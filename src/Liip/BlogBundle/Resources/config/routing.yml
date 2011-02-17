@@ -1,0 +1,11 @@
+blog_index:
+    pattern:  /blog
+    defaults: { _controller: BlogBundle:Blog:index }
+    
+blog_create:
+    pattern:  /blog/create
+    defaults: { _controller: BlogBundle:Blog:create }
+    
+blog_edit:
+    pattern:  /blog/{id}
+    defaults: { _controller: BlogBundle:Blog:edit }
