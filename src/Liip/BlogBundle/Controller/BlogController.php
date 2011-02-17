@@ -41,18 +41,18 @@ class BlogController extends Controller
     protected function _editAction(Post $post)
     {
         $em = $this->get('doctrine.orm.default_entity_manager');
-        $form = PostForm::create($this->get('form.context'), 'post');
-        $form->bind($this->get('request'), $post);
 
-        if ($form->isValid()) {
-            $em->persist($post);
-            $em->flush();
+        // create form here
 
-            return $this->redirect($this->generateUrl('blog_index'));
-        }
+        // when the form is submitted without errors, execute:
+        //
+        // $em->persist($post);
+        // $em->flush();
+        //
+        // return $this->redirect($this->generateUrl('blog_index'));
 
         return $this->render('BlogBundle:Blog:edit.html.twig', array(
-            'form' => $form,
+            // pass form to template
         ));
     }
 }

@@ -21,24 +21,6 @@ class PostForm extends Form
 {
     protected function configure()
     {
-        $this->setDataClass('Liip\BlogBundle\Entity\Post');
-        $this->add('title');
-        $this->add('content');
-        $this->add('abstract');
-        $this->add('enabled');
-        $this->add(new DateField('publicationDateStart'));
-        $this->add(new ChoiceField('commentsDefaultStatus', array(
-            'choices' => Comment::getStatusCodes(),
-        )));
-        $this->add('tags', array('expanded' => true));
-
-        $commentForm = Form::create($this->getContext());
-        $commentForm->setDataClass('Liip\BlogBundle\Entity\Comment');
-        $commentForm->add('name');
-        $commentForm->add('message');
-
-        $this->add(new CollectionField('comments', array(
-            'prototype' => $commentForm,
-        )));
+        // setup form here
     }
 }
