@@ -20,4 +20,7 @@ $loader->registerPrefixes(array(
     'Twig_'            => __DIR__.'/../vendor/twig/lib',
     'Swift_'           => __DIR__.'/../vendor/swiftmailer/lib/classes',
 ));
+$loader->registerPrefixFallback(array(
+    __DIR__.'/../vendor/symfony/src/Symfony/Component/Locale/Resources/stubs',
+));
 $loader->register();
